@@ -1,4 +1,5 @@
 1 Introduction
+
 Demand paging is a method of mapping a large address space into a relatively small amount of physical memory. It allows a program to use an address space that is larger than the physical memory, and access non-contiguous sections of the physical memory in a contiguous way. Demand paging is accomplished by using a "backing store" (usually disk) to hold pages of memory that are not currently in use.
 From this point on, only the details of this project are discussed. It is assumed that you have read the Intel documents and are comfortable with paging concepts and the Intel specific details. Here are some suggested reading materials:
 
@@ -7,6 +8,7 @@ Intel System Programming Manual
 
 
 2 Goal
+
 The goal of this project is to implement the following system calls and their supporting infrastructure.
 
 
@@ -41,6 +43,7 @@ You will implement a corresponding vfreemem() for vgetmem() call. vfreemem() tak
 
 
 4 Overall Organization
+
 The following sections discuss at a high level the organization of the system, the various pieces that need to be implemented in Xinu and how they relate to each other. You are welcome to use a different implementation strategy if you think it is easier or better as long as it has the same functionality and challenges.
 
 
@@ -174,6 +177,7 @@ You may also want to use this table to hold other information for page replaceme
 
 
 4.3 Process Considerations
+
 With each process having its own page directory and page tables, there are some new considerations in dealing with processes.
 
 4.3.1 Process Creation
@@ -206,6 +210,7 @@ The following should occur at system initialization:
 
 
 4.4 The Interrupt Service Routine (ISR)
+
 As you know, a page fault triggers an interrupt 14. When an interrupt occurs the machine pushes CS:IP and then an error code (see Intel Volume III chapter 5)
                                                          ---------- 
                                                          error code 
