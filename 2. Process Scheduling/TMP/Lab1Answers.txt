@@ -1,0 +1,48 @@
+Q1) What are the advantages and disadvantages of each of the two scheduling policies? Also, give the advantages and disadvantages of the round robin scheduling policy originally implemented in Xinu.
+
+Ans)
+
+Exponential Distribution scheduler:
+
+Advantages: 
+(i) Since the processes are scheduled randomnly, the CPU experiences no starvation.
+(ii) This random scheduler makes the processes never to be scheduled in the same order.
+(iii) It is easier to implement.
+
+Disadvantages: 
+(i) An I/O process might not get the chance to be scheduled if it received lowe priority than other processes, which is not desirable.
+(ii) An optimal lamba value has to be chosen otherwise it would result in an unfair scheduler.
+
+
+Linux-like scheduler:
+
+Advantages:
+(i) Every process is guarenteed a time slot to run in every epoch based on the goodness.
+(ii) Linux-like scheduler handles the I/O interrupts better compared to default XINU scheduler or exponential distribution scheduler as a process that yielded the CPU might get another chance to be scheduled within the same epoch.
+(iii) If a process did not get a chance to be scheduled in previous epoch, its priority is increased and thereby given more time to run.
+
+Disadvantages:
+(i) The implementation is much more complex with more edge cases to be considered.
+
+
+Round Robin Scheduling in Default XINU scheduler:
+
+Advantages:
+(i) Processes are scheduled based on the higher priorities and if the priorities are equal, the processes are scheduled alternatively for small quantums till they are finished executing.
+(ii) Compared to other non-preeptive schedlers, this has better response time.
+
+Disadvantages:
+(i) Processes with low priorities might never get a chance to be scheduled unless there are no new processes with high priorities.
+
+
+Q2) Describe the way each of the schedulers affects the NULL process.
+
+Ans) 
+Exponential Distribution scheduler: 
+NULL process gets scheduled if and only if the ready queue is empty. 
+
+Linux-Like Scheduler: 
+The NULL process does not get scheduled as its goodness value is always 0.
+
+Default XINU Scheduler: 
+NULL process is scheduled if and only if the ready queue is empty.
