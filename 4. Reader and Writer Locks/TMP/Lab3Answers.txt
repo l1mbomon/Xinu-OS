@@ -1,0 +1,33 @@
+1) 
+	1) Priority Ceiling:-
+	
+		Priority inversion can be overcome using this method. Here, every process is limited by a priority ceiling by assigning the highest priority of all the processes that try to aquire a lock.  Hence, when there is a higher priority process in the wait queue while a low priority process is holding the lock, the priority of the low process is upgraded to the highest priority in wait queue. Thus the process which currently has the lock can perform its tasks.
+
+1) 2)   Semaphore:
+		test : Testing sempahores
+		-start writer1, then sleep 1s
+  		swriter1: to acquire lock
+  		swriter1: acquired lock, sleep 10s
+		-start reader1, reader 1 will be blocked then sleep 1s
+  		sreader1: to acquire lock
+		Test case failed
+
+
+	Priority Inheritance:
+
+        	test : Test the Priority Inversion problem
+		-start writer1, then sleep 1s
+		writer1: to acquire lock
+  		writer1: acquired lock, sleep 6s
+		-start reader1, reader 1 will be blocked then sleep 1s
+  		reader1: to acquire lock
+		-start proc 1.
+		Test proc going to sleep 10s
+  		writer1: to release lock
+  		reader1: acquired lock
+  		reader1: to release lock
+
+
+2)In the given pseudo-code, multiple readers can acquire the lock and perform the dp_update() function and may also modify the values of buf_len of each other resulting in synchronization issue.
+
+For example, consider 2 readers, R1 and R2. Initially R1 acquires the lock and then also acquires the semaphore and goes into the critical section. Let us assume that R1 finishes executing the memcpy line. Now it has copied its value onto the global buffer but has not updated the buf->len value. Now the scheduler runs reader R2. R2 is also able to acquire the lock and the semaphore. Let us assume that R2 runs fully. It updates the global_buf with its string representation of time. Now the global_buf which contained the value written by R1 be overwritten by R2. This happened because the scheduler scheduled R2 before the buf->len value had been updated by R1.Thus causing synchronization issue when there are multiple readers.
